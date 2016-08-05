@@ -1,4 +1,9 @@
 # apns-swift
+HTTP/2 Apple Push Notification Service (APNs) push provider written in Swift
+
+## Features
+- Sends notifications using new HTTP/2 protocol
+- Send notifications iOS, tvOS and macOS apps
 
 ## Usage
 ### Create APNS connection object
