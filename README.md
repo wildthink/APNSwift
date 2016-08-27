@@ -6,15 +6,17 @@ HTTP/2 Apple Push Notification Service (APNs) push provider written in Swift
 - Send notifications iOS, tvOS and macOS apps
 
 ## Usage
-### Create APNS connection object
+### APNS Connection can be created by `SecIdentity` of `Path to PKCS certificate`
 ```swift
-guard let apnsConnection = APNS(certificatePath: pathOfCertificate, passphrase: "*******") else {
-    Swift.print("Connection creation failed")
-    return
+guard let apns = APNS(certificatePath: "/path/to/PKCS/certificate", passphrase: "********") else {
+    //Failed to create APNS object
+    return nil
 }
+
+let apnsConnection = APNS(identity: certificateIdentity)
 ```
 
-### Create options
+### Push Notification options
 ```swift
 var apnsOptions = APNS.Options()
 apnsOptions.development = true
@@ -23,12 +25,13 @@ apnsOptions.port = APNS.Options.Port.p443
 
 ### Push
 ```swift
-try! apnsConnection.sendPush(tokenList: tokens, payload: jsonPayLoad, options: apnsOptions) {
+try! apnsConnection.sendPush(tokenList: tokens, payload: jsonPayLoad) {
     (apnsResponse) in
-    Swift.print("Status: \(apnsResponse.serviceStatus)")
-    Swift.print("APNS ID: \(apnsResponse.apnsId)")
+    Swift.print("\n\(apnsResponse.deviceToken)")
+    Swift.print("  Status: \(apnsResponse.serviceStatus)")
+    Swift.print("  APNS ID: \(apnsResponse.apnsId ?? "")")
     if let errorReason = apnsResponse.errorReason {
-        Swift.print("ERROR: \(errorReason)")
+        Swift.print("  ERROR: \(errorReason)")
     }
 }
 ```
