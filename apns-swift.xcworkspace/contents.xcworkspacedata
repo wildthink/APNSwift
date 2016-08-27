@@ -8,9 +8,6 @@
          location = "group:Source/APNS.swift">
       </FileRef>
       <FileRef
-         location = "group:Source/APNS.swift">
-      </FileRef>
-      <FileRef
          location = "group:Source/APNSError.swift">
       </FileRef>
       <FileRef

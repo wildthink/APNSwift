@@ -13,8 +13,10 @@ extension APNS {
         let apnsId: String?
         let serviceStatus: APNS.ServiceStatus
         var errorReason: APNS.Error?
+        let deviceToken: String
 
-        init(response: NSHTTPURLResponse, data: NSData?) {
+        init(deviceToken: String, response: NSHTTPURLResponse, data: NSData?) {
+            self.deviceToken = deviceToken
             apnsId = response.allHeaderFields["apns-id"] as? String
             serviceStatus = APNS.ServiceStatus(rawValue: response.statusCode)!
 

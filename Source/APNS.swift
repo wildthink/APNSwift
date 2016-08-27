@@ -13,6 +13,7 @@ class APNS: NSObject {
 
     private var secIdentity: SecIdentityRef?
     private var session: NSURLSession!
+    var options = Options()
 
     private func baseURL(development: Bool, port: Options.Port) -> NSURL {
         if development {
@@ -22,11 +23,19 @@ class APNS: NSObject {
         }
     }
 
+    init(identity: SecIdentityRef) {
+        super.init()
+
+        self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+
+        self.secIdentity = identity
+    }
+
     init?(certificatePath: String, passphrase: String) {
-        guard let identity = Certificates.getIdentityWith(certificatePath, passphrase: passphrase) else {
+        super.init()
+        guard let identity = identityFor(certificatePath, passphrase: passphrase) else {
             return nil
         }
-        super.init()
 
         self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
 
@@ -36,7 +45,6 @@ class APNS: NSObject {
     func sendPush(
         tokenList tokenList: [String],
         payload: NSData,
-        options: Options,
         responseBlock: ((apnsResponse: APNS.Response) -> Void)?
         ) throws {
 
@@ -61,11 +69,12 @@ class APNS: NSObject {
 
             self.session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
                 guard err == nil else {
-                    lgErr(err!.localizedDescription)
+                    log?.error(err!.localizedDescription)
                     return
                 }
                 let httpResponse = response as! NSHTTPURLResponse
-                responseBlock?(apnsResponse: APNS.Response(response: httpResponse, data: data))
+
+                responseBlock?(apnsResponse: Response(deviceToken: token, response: httpResponse, data: data))
             }).resume()
         }
     }
@@ -74,9 +83,29 @@ class APNS: NSObject {
 extension APNS: NSURLSessionDelegate {
     func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         var cert : SecCertificate?
-        SecIdentityCopyCertificate(self.secIdentity!, &cert)
+        SecIdentityCopyCertificate(self.secIdentity!, &cert)//FIXME: User identity.certificate instead
         let credentials = NSURLCredential(identity: self.secIdentity!, certificates: [cert!], persistence: .ForSession)
         completionHandler(.UseCredential,credentials)
+    }
+}
+
+extension APNS {
+    func identityFor(certificatePath: String, passphrase: String) -> SecIdentityRef? {
+        let PKCS12Data = NSData(contentsOfFile: certificatePath)
+        let passPhraseKey : String = kSecImportExportPassphrase as String
+        let options = [passPhraseKey : passphrase]
+        var items : CFArray?
+        let ossStatus = SecPKCS12Import(PKCS12Data!, options, &items)
+        guard ossStatus == errSecSuccess else {
+            return nil
+        }
+        let arr = items!
+        if CFArrayGetCount(arr) > 0 {
+            let newArray = arr as [AnyObject]
+            let secIdentity =  newArray[0][kSecImportItemIdentity as String] as! SecIdentityRef
+            return secIdentity
+        }
+        return nil
     }
 }
 
