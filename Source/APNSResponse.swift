@@ -20,7 +20,7 @@ extension APNS {
             apnsId = response.allHeaderFields["apns-id"] as? String
             serviceStatus = APNS.ServiceStatus(rawValue: response.statusCode)!
 
-            if serviceStatus != .Success {
+            if serviceStatus != .success {
                 let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
                 if let reason = json["reason"] as? String {
                     errorReason = APNS.Error(rawValue: reason)

@@ -9,27 +9,27 @@
 import Foundation
 extension APNS {
     public enum ServiceStatus: Int, CustomStringConvertible {
-        case Success = 200
-        case BadRequest = 400
-        case BadCertitficate = 403
-        case BadMethod = 405
-        case DeviceTokenIsNoLongerActive = 410
-        case BadNotificationPayload = 413
-        case ServerReceivedTooManyRequests = 429
-        case InternalServerError = 500
-        case ServerShutingDownOrUnavailable = 503
+        case success = 200
+        case badRequest = 400
+        case badCertitficate = 403
+        case badMethod = 405
+        case deviceTokenIsNoLongerActive = 410
+        case badNotificationPayload = 413
+        case serverReceivedTooManyRequests = 429
+        case internalServerError = 500
+        case serverShutingDownOrUnavailable = 503
 
         public var description: String {
             switch self {
-            case .Success: return "Success"
-            case .BadRequest: return "Bad request"
-            case .BadCertitficate: return "There was an error with the certificate."
-            case .BadMethod: return "The request used a bad :method value. Only POST requests are supported."
-            case .DeviceTokenIsNoLongerActive: return "The device token is no longer active for the topic."
-            case .BadNotificationPayload: return "The notification payload was too large."
-            case .ServerReceivedTooManyRequests: return "The server received too many requests for the same device token."
-            case .InternalServerError: return "Internal server error"
-            case .ServerShutingDownOrUnavailable: return "The server is shutting down and unavailable."
+            case .success: return "Success"
+            case .badRequest: return "Bad request"
+            case .badCertitficate: return "There was an error with the certificate."
+            case .badMethod: return "The request used a bad :method value. Only POST requests are supported."
+            case .deviceTokenIsNoLongerActive: return "The device token is no longer active for the topic."
+            case .badNotificationPayload: return "The notification payload was too large."
+            case .serverReceivedTooManyRequests: return "The server received too many requests for the same device token."
+            case .internalServerError: return "Internal server error"
+            case .serverShutingDownOrUnavailable: return "The server is shutting down and unavailable."
             }
         }
     }
