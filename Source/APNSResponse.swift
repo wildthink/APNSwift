@@ -7,7 +7,9 @@
 //
 
 import Foundation
+
 extension APNS {
+
     public struct Response {
 
         public let apnsId: String?

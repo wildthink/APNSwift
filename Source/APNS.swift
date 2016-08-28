@@ -15,14 +15,6 @@ public class APNS: NSObject {
     private var session: NSURLSession!
     public var options = Options()
 
-    private func baseURL(development: Bool, port: Options.Port) -> NSURL {
-        if development {
-            return NSURL(string: "https://api.development.push.apple.com:\(port)/3/device/")!
-        } else {
-            return NSURL(string: "https://api.push.apple.com:\(port)/3/device/")!
-        }
-    }
-
     public init(identity: SecIdentityRef) {
         super.init()
 
@@ -80,6 +72,7 @@ public class APNS: NSObject {
     }
 }
 
+//MARK: - NSURLSessionDelegate
 extension APNS: NSURLSessionDelegate {
     public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         var cert : SecCertificate?
@@ -89,8 +82,18 @@ extension APNS: NSURLSessionDelegate {
     }
 }
 
+//MARK: - Private Helpers
 extension APNS {
-    func identityFor(certificatePath: String, passphrase: String) -> SecIdentityRef? {
+
+    private func baseURL(development: Bool, port: Options.Port) -> NSURL {
+        if development {
+            return NSURL(string: "https://api.development.push.apple.com:\(port)/3/device/")!
+        } else {
+            return NSURL(string: "https://api.push.apple.com:\(port)/3/device/")!
+        }
+    }
+
+    private func identityFor(certificatePath: String, passphrase: String) -> SecIdentityRef? {
         let PKCS12Data = NSData(contentsOfFile: certificatePath)
         let passPhraseKey : String = kSecImportExportPassphrase as String
         let options = [passPhraseKey : passphrase]
