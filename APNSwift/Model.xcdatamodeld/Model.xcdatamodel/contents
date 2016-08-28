@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+    <entity name="APNS" syncable="YES">
+        <relationship name="options" maxCount="1" deletionRule="Nullify" destinationEntity="APNSOptions" syncable="YES"/>
+    </entity>
+    <entity name="APNSOptions" syncable="YES"/>
+    <elements>
+        <element name="APNS" positionX="1170" positionY="635" width="128" height="58"/>
+        <element name="APNSOptions" positionX="1348" positionY="657" width="128" height="43"/>
+    </elements>
+</model>

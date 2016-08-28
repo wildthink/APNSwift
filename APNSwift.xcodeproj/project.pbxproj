@@ -19,6 +19,7 @@
 		E3576EE11D72F28B0017A77E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E3576EDE1D72F28B0017A77E /* LICENSE */; };
 		E3576EE21D72F28B0017A77E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E3576EDF1D72F28B0017A77E /* README.md */; };
 		E3576EE51D72F47E0017A77E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E3576EE41D72F47E0017A77E /* .gitignore */; };
+		E3FBF3101D72FCD3001378A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E3FBF30E1D72FCD3001378A2 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E3576EDE1D72F28B0017A77E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E3576EDF1D72F28B0017A77E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E3576EE41D72F47E0017A77E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		E3FBF30F1D72FCD3001378A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				E3576EBC1D72F2080017A77E /* APNSwift.h */,
+				E3FBF30E1D72FCD3001378A2 /* Model.xcdatamodeld */,
 				E3576EBE1D72F2080017A77E /* Info.plist */,
 				E3576EE41D72F47E0017A77E /* .gitignore */,
 			);
@@ -235,6 +238,7 @@
 				E3576EE21D72F28B0017A77E /* README.md in Sources */,
 				E3576EDA1D72F2660017A77E /* APNSOptions.swift in Sources */,
 				E3576ED91D72F2660017A77E /* APNSError.swift in Sources */,
+				E3FBF3101D72FCD3001378A2 /* Model.xcdatamodeld in Sources */,
 				E3576EDB1D72F2660017A77E /* APNSResponse.swift in Sources */,
 				E3576EDC1D72F2660017A77E /* APNSServiceStatus.swift in Sources */,
 				E3576ED81D72F2660017A77E /* APNS.swift in Sources */,
@@ -437,6 +441,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E3FBF30E1D72FCD3001378A2 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E3FBF30F1D72FCD3001378A2 /* Model.xcdatamodel */,
+			);
+			currentVersion = E3FBF30F1D72FCD3001378A2 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E3576EB01D72F2080017A77E /* Project object */;
 }
