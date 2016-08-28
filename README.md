@@ -17,7 +17,7 @@ pod 'APNSwift'
 ```
 
 ## Usage
-### APNS Connection can be created by `SecIdentity` or `Path to PKCS certificate`
+### APNS Connection can be created by `SecIdentity` or `PKCS certificate file`
 ```swift
 guard let apns = APNS(certificatePath: "/path/to/PKCS/certificate", passphrase: "********") else {
     //Failed to create APNS object
