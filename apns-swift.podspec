@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
-  spec.name = 'apns-swift'
-  spec.version = '0.1.0'
+  spec.name = 'APNSwift'
+  spec.version = '0.1.1'
   spec.license = 'MIT'
-  spec.summary = 'APNS provider written in Swift'
+  spec.summary = 'HTTP/2 based APNS provider written in Swift'
   spec.homepage = 'https://github.com/kaunteya/apns-swift'
   spec.authors = { 'Kaunteya Suryawanshi' => 'k.suryawanshi@gmail.com' }
   spec.source = { :git => 'https://github.com/kaunteya/apns-swift.git', :tag => spec.version }
