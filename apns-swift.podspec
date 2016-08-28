@@ -7,9 +7,8 @@ Pod::Spec.new do |spec|
   spec.authors = { 'Kaunteya Suryawanshi' => 'k.suryawanshi@gmail.com' }
   spec.source = { :git => 'https://github.com/kaunteya/apns-swift.git', :tag => spec.version }
 
-  spec.ios.deployment_target = '8.0'
-  spec.osx.deployment_target = '10.9'
-  spec.tvos.deployment_target = '9.0'
+  spec.ios.deployment_target = '9.0'
+  spec.osx.deployment_target = '10.10'
 
   spec.requires_arc = true
 

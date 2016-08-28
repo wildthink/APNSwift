@@ -69,7 +69,7 @@ class APNS: NSObject {
 
             self.session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
                 guard err == nil else {
-                    log?.error(err!.localizedDescription)
+//                    log?.error(err!.localizedDescription)
                     return
                 }
                 let httpResponse = response as! NSHTTPURLResponse
