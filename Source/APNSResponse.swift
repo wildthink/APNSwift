@@ -8,12 +8,12 @@
 
 import Foundation
 extension APNS {
-    struct Response {
+    public struct Response {
 
-        let apnsId: String?
-        let serviceStatus: APNS.ServiceStatus
-        var errorReason: APNS.Error?
-        let deviceToken: String
+        public let apnsId: String?
+        public let serviceStatus: APNS.ServiceStatus
+        public var errorReason: APNS.Error?
+        public let deviceToken: String
 
         init(deviceToken: String, response: NSHTTPURLResponse, data: NSData?) {
             self.deviceToken = deviceToken

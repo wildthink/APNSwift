@@ -9,11 +9,11 @@
 import Foundation
 import Security
 
-class APNS: NSObject {
+public class APNS: NSObject {
 
     private var secIdentity: SecIdentityRef?
     private var session: NSURLSession!
-    var options = Options()
+    public var options = Options()
 
     private func baseURL(development: Bool, port: Options.Port) -> NSURL {
         if development {
@@ -23,7 +23,7 @@ class APNS: NSObject {
         }
     }
 
-    init(identity: SecIdentityRef) {
+    public init(identity: SecIdentityRef) {
         super.init()
 
         self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
@@ -31,7 +31,7 @@ class APNS: NSObject {
         self.secIdentity = identity
     }
 
-    init?(certificatePath: String, passphrase: String) {
+    public init?(certificatePath: String, passphrase: String) {
         super.init()
         guard let identity = identityFor(certificatePath, passphrase: passphrase) else {
             return nil
@@ -42,7 +42,7 @@ class APNS: NSObject {
         self.secIdentity = identity
     }
 
-    func sendPush(
+    public func sendPush(
         tokenList tokenList: [String],
         payload: NSData,
         responseBlock: ((apnsResponse: APNS.Response) -> Void)?
@@ -81,7 +81,7 @@ class APNS: NSObject {
 }
 
 extension APNS: NSURLSessionDelegate {
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         var cert : SecCertificate?
         SecIdentityCopyCertificate(self.secIdentity!, &cert)//FIXME: User identity.certificate instead
         let credentials = NSURLCredential(identity: self.secIdentity!, certificates: [cert!], persistence: .ForSession)

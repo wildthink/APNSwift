@@ -8,15 +8,15 @@
 
 import Foundation
 extension APNS {
-    struct Options {
-        enum Port: Int {
+    public struct Options {
+        public enum Port: Int {
             case p443 = 443, p2197 = 2197
         }
-        var port: Port = .p443
-        var development: Bool = true
-        var topic: String?
-        var expiry: NSDate?
-        var priority: Int?
-        var apnsId: String?
+        public var port: Port = .p443
+        public var development: Bool = true
+        public var topic: String?
+        public var expiry: NSDate?
+        public var priority: Int?
+        public var apnsId: String?
     }
 }

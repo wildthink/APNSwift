@@ -8,7 +8,7 @@
 
 import Foundation
 extension APNS {
-    enum ServiceStatus: Int, CustomStringConvertible {
+    public enum ServiceStatus: Int, CustomStringConvertible {
         case Success = 200
         case BadRequest = 400
         case BadCertitficate = 403
@@ -19,7 +19,7 @@ extension APNS {
         case InternalServerError = 500
         case ServerShutingDownOrUnavailable = 503
 
-        var description: String {
+        public var description: String {
             switch self {
             case .Success: return "Success"
             case .BadRequest: return "Bad request"

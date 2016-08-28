@@ -7,8 +7,8 @@
 //
 
 import Foundation
-extension APNS {
-    enum Error: String, CustomStringConvertible {
+public extension APNS {
+    public enum Error: String, CustomStringConvertible {
         case PayloadEmpty
         case PayloadTooLarge
         case BadTopic
@@ -34,7 +34,7 @@ extension APNS {
         case MissingTopic
 
 
-        var description: String {
+        public var description: String {
             switch self {
             case .PayloadEmpty: return "The message payload was empty."
             case .PayloadTooLarge: return "The message payload was too large. The maximum payload size is 4096 bytes."
