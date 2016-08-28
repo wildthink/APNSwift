@@ -24,7 +24,7 @@
       location = "group:README.md">
    </FileRef>
    <FileRef
-      location = "group:apns-swift.podspec">
+      location = "group:APNSwift.podspec">
    </FileRef>
    <FileRef
       location = "group:LICENSE">
