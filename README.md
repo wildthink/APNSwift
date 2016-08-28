@@ -5,6 +5,17 @@ HTTP/2 Apple Push Notification Service (APNs) push provider written in Swift
 - Sends notifications using new HTTP/2 protocol
 - Send notifications iOS, tvOS and macOS apps
 
+# Installation
+##CocoaPods
+[CocoaPods](http://cocoapods.org) adds supports for Swift and embedded frameworks.
+
+To integrate APNSwift into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+
+pod 'APNSwift'
+```
+
 ## Usage
 ### APNS Connection can be created by `SecIdentity` or `Path to PKCS certificate`
 ```swift
