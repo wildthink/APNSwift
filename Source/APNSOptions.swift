@@ -12,6 +12,7 @@ extension APNS {
         public enum Port: Int {
             case p443 = 443, p2197 = 2197
         }
+        public init() {}
         public var port: Port = .p443
         public var development: Bool = true
         public var topic: String?
