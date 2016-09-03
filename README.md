@@ -1,3 +1,7 @@
+[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/APNSwift.svg)](https://img.shields.io/cocoapods/v/APNSwift.svg)
+[![Platform](https://img.shields.io/cocoapods/p/APNSwift.svg?style=flat)](http://cocoadocs.org/docsets/APNSwift)
+[![License](https://img.shields.io/cocoapods/l/APNSwift.svg?style=flat)](http://cocoadocs.org/docsets/APNSwift)
+
 # apns-swift
 HTTP/2 Apple Push Notification Service (APNs) push provider written in Swift
 
