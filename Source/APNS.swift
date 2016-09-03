@@ -13,13 +13,14 @@ public class APNS: NSObject {
 
     private var secIdentity: SecIdentityRef?
     private var session: NSURLSession!
-    public var options = Options()
+    private var options: Options!
 
-    public init(identity: SecIdentityRef) {
+    public init(identity: SecIdentityRef, options: Options? = Options()) {
         super.init()
 
         self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
 
+        self.options = options
         self.secIdentity = identity
     }
 
@@ -56,7 +57,7 @@ public class APNS: NSObject {
                 request.addValue(apnsId, forHTTPHeaderField: "apns-id")
             }
             if let apnsExpiry = options.expiry {
-                request.addValue("\(apnsExpiry.timeIntervalSince1970)", forHTTPHeaderField: "apns-expiration")
+                request.addValue("\(apnsExpiry.timeIntervalSince1970.rounded())", forHTTPHeaderField: "apns-expiration")
             }
 
             self.session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
@@ -112,5 +113,10 @@ extension APNS {
     }
 }
 
-
+//FIXME: Temporary hack until Swift 3.0
+public extension NSTimeInterval {
+    func rounded() -> Int {
+        return Int(self)
+    }
+}
 
