@@ -29,14 +29,16 @@ guard let apns = APNS(certificatePath: "/path/to/PKCS/certificate", passphrase: 
     return nil
 }
 
-let apnsConnection = APNS(identity: certificateIdentity)
+let apnsConnection = APNS(identity: certificateIdentity, options: apnsOptions)
 ```
 
 ### Push Notification options
 ```swift
 var apnsOptions = APNS.Options()
-apnsOptions.development = true
-apnsOptions.port = APNS.Options.Port.p443
+apnsOptions.topic = "Weekend deal"
+apnsOptions.port = .p2197
+apnsOptions.expiry = NSDate()
+apnsOptions.development = false
 ```
 
 ### Push
