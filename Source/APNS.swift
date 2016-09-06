@@ -1,6 +1,6 @@
 //
 //  APNS.swift
-//  APNS
+//  APNSwift
 //
 //  Created by Alexey Khokhlov on 25.01.16.
 //  Copyright © 2016 Alexey Khokhlov. All rights reserved.

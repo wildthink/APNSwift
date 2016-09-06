@@ -1,6 +1,6 @@
 //
 //  APNSOptions.swift
-//  Smart APN
+//  APNSwift
 //
 //  Created by Kaunteya Suryawanshi on 26/07/16.
 //  Copyright © 2016 Kaunteya Suryawanshi. All rights reserved.

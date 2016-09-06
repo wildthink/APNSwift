@@ -1,6 +1,6 @@
 //
 //  APNServiceStatus.swift
-//  Smart APN
+//  APNSwift
 //
 //  Created by Kaunteya Suryawanshi on 16/07/16.
 //  Copyright © 2016 Kaunteya Suryawanshi. All rights reserved.
