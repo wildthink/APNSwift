@@ -15,7 +15,7 @@ extension APNS {
 
         public var topic: String?
         public var port: Port = .p443
-        public var expiry: NSDate?
+        public var expiry: Date?
         public var priority: Int?
         public var apnsId: String?
         public var development: Bool = true

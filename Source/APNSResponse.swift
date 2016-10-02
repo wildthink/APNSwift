@@ -17,13 +17,13 @@ extension APNS {
         public var errorReason: APNS.Error?
         public let deviceToken: String
 
-        init(deviceToken: String, response: NSHTTPURLResponse, data: NSData?) {
+        init(deviceToken: String, response: HTTPURLResponse, data: Data?) {
             self.deviceToken = deviceToken
             apnsId = response.allHeaderFields["apns-id"] as? String
             serviceStatus = APNS.ServiceStatus(rawValue: response.statusCode)!
 
             if serviceStatus != .success {
-                let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
+                let json = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions(rawValue: 0))  as! [String : Any]
                 if let reason = json["reason"] as? String {
                     errorReason = APNS.Error(rawValue: reason)
                 }

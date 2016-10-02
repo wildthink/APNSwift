@@ -9,16 +9,16 @@
 import Foundation
 import Security
 
-public class APNS: NSObject {
+open class APNS: NSObject {
 
-    private var secIdentity: SecIdentityRef?
-    private var session: NSURLSession!
-    private var options: Options!
+    fileprivate var secIdentity: SecIdentity?
+    fileprivate var session: URLSession!
+    fileprivate var options: Options!
 
-    public init(identity: SecIdentityRef, options: Options? = Options()) {
+    public init(identity: SecIdentity, options: Options? = Options()) {
         super.init()
 
-        self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
 
         self.options = options
         self.secIdentity = identity
@@ -30,23 +30,24 @@ public class APNS: NSObject {
             return nil
         }
 
-        self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
 
         self.secIdentity = identity
     }
 
-    public func sendPush(
-        tokenList tokenList: [String],
-        payload: NSData,
-        responseBlock: ((apnsResponse: APNS.Response) -> Void)?
+    open func sendPush(
+        tokenList: [String],
+        payload: Data,
+        responseBlock: ((_ apnsResponse: APNS.Response) -> Void)?
         ) throws {
 
         for token in tokenList {
-            let url = self.baseURL(options.development, port: options.port).URLByAppendingPathComponent(token)
-            let request = NSMutableURLRequest(URL: url)
+            let pushURL = self.baseURL(options.development, port: options.port).appendingPathComponent(token)
 
-            request.HTTPBody = payload
-            request.HTTPMethod = "POST"
+            var request = URLRequest(url: pushURL)
+
+            request.httpBody = payload
+            request.httpMethod = "POST"
             if let topic = options.topic {
                 request.addValue(topic, forHTTPHeaderField: "apns-topic")
             }
@@ -60,53 +61,53 @@ public class APNS: NSObject {
                 request.addValue("\(apnsExpiry.timeIntervalSince1970.rounded())", forHTTPHeaderField: "apns-expiration")
             }
 
-            self.session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
+            session.dataTask(with: request, completionHandler: { (data, response, err) -> Void in
                 guard err == nil else {
 //                    log?.error(err!.localizedDescription)
                     return
                 }
-                let httpResponse = response as! NSHTTPURLResponse
+                let httpResponse = response as! HTTPURLResponse
 
-                responseBlock?(apnsResponse: Response(deviceToken: token, response: httpResponse, data: data))
+                responseBlock?(Response(deviceToken: token, response: httpResponse, data: data))
             }).resume()
         }
     }
 }
 
 //MARK: - NSURLSessionDelegate
-extension APNS: NSURLSessionDelegate {
-    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+extension APNS: URLSessionDelegate {
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         var cert : SecCertificate?
         SecIdentityCopyCertificate(self.secIdentity!, &cert)//FIXME: User identity.certificate instead
-        let credentials = NSURLCredential(identity: self.secIdentity!, certificates: [cert!], persistence: .ForSession)
-        completionHandler(.UseCredential,credentials)
+        let credentials = URLCredential(identity: self.secIdentity!, certificates: [cert!], persistence: .forSession)
+        completionHandler(.useCredential,credentials)
     }
 }
 
 //MARK: - Private Helpers
 extension APNS {
 
-    private func baseURL(development: Bool, port: Options.Port) -> NSURL {
+    fileprivate func baseURL(_ development: Bool, port: Options.Port) -> URL {
         if development {
-            return NSURL(string: "https://api.development.push.apple.com:\(port)/3/device/")!
+            return URL(string: "https://api.development.push.apple.com:\(port)/3/device/")!
         } else {
-            return NSURL(string: "https://api.push.apple.com:\(port)/3/device/")!
+            return URL(string: "https://api.push.apple.com:\(port)/3/device/")!
         }
     }
 
-    private func identityFor(certificatePath: String, passphrase: String) -> SecIdentityRef? {
-        let PKCS12Data = NSData(contentsOfFile: certificatePath)
+    fileprivate func identityFor(_ certificatePath: String, passphrase: String) -> SecIdentity? {
+        let PKCS12Data = try? Data(contentsOf: URL(fileURLWithPath: certificatePath))
         let passPhraseKey : String = kSecImportExportPassphrase as String
         let options = [passPhraseKey : passphrase]
         var items : CFArray?
-        let ossStatus = SecPKCS12Import(PKCS12Data!, options, &items)
+        let ossStatus = SecPKCS12Import(PKCS12Data! as CFData, options as CFDictionary, &items)
         guard ossStatus == errSecSuccess else {
             return nil
         }
         let arr = items!
         if CFArrayGetCount(arr) > 0 {
             let newArray = arr as [AnyObject]
-            let secIdentity =  newArray[0][kSecImportItemIdentity as String] as! SecIdentityRef
+            let secIdentity =  newArray[0][kSecImportItemIdentity as String] as! SecIdentity
             return secIdentity
         }
         return nil
@@ -114,7 +115,7 @@ extension APNS {
 }
 
 //FIXME: Temporary hack until Swift 3.0
-public extension NSTimeInterval {
+public extension TimeInterval {
     func rounded() -> Int {
         return Int(self)
     }

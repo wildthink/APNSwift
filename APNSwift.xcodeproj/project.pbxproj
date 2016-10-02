@@ -17,9 +17,7 @@
 		E3576EDC1D72F2660017A77E /* APNSServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3576ED71D72F2660017A77E /* APNSServiceStatus.swift */; };
 		E3576EE01D72F28B0017A77E /* APNSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E3576EDD1D72F28B0017A77E /* APNSwift.podspec */; };
 		E3576EE11D72F28B0017A77E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E3576EDE1D72F28B0017A77E /* LICENSE */; };
-		E3576EE21D72F28B0017A77E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E3576EDF1D72F28B0017A77E /* README.md */; };
 		E3576EE51D72F47E0017A77E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E3576EE41D72F47E0017A77E /* .gitignore */; };
-		E3FBF3101D72FCD3001378A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E3FBF30E1D72FCD3001378A2 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +46,6 @@
 		E3576EDE1D72F28B0017A77E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E3576EDF1D72F28B0017A77E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E3576EE41D72F47E0017A77E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		E3FBF30F1D72FCD3001378A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				E3576EBC1D72F2080017A77E /* APNSwift.h */,
-				E3FBF30E1D72FCD3001378A2 /* Model.xcdatamodeld */,
 				E3576EBE1D72F2080017A77E /* Info.plist */,
 				E3576EE41D72F47E0017A77E /* .gitignore */,
 			);
@@ -181,14 +177,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kaunteya Suryawanshi";
 				TargetAttributes = {
 					E3576EB81D72F2080017A77E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					E3576EC21D72F2080017A77E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -235,10 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3576EE21D72F28B0017A77E /* README.md in Sources */,
 				E3576EDA1D72F2660017A77E /* APNSOptions.swift in Sources */,
 				E3576ED91D72F2660017A77E /* APNSError.swift in Sources */,
-				E3FBF3101D72FCD3001378A2 /* Model.xcdatamodeld in Sources */,
 				E3576EDB1D72F2660017A77E /* APNSResponse.swift in Sources */,
 				E3576EDC1D72F2660017A77E /* APNSServiceStatus.swift in Sources */,
 				E3576ED81D72F2660017A77E /* APNS.swift in Sources */,
@@ -278,8 +274,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -327,8 +325,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -348,6 +348,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -359,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -370,6 +372,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -377,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -387,6 +391,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaunteya.APNSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -397,6 +402,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaunteya.APNSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -407,6 +413,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaunteya.APNSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -441,19 +448,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E3FBF30E1D72FCD3001378A2 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E3FBF30F1D72FCD3001378A2 /* Model.xcdatamodel */,
-			);
-			currentVersion = E3FBF30F1D72FCD3001378A2 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E3576EB01D72F2080017A77E /* Project object */;
 }
