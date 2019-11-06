@@ -58,26 +58,3 @@ try! apnsConnection.sendPush(tokenList: tokens, payload: jsonPayLoad) {
     }
 }
 ```
-# Mac App
-
-<p align="center">
-<a href="https://itunes.apple.com/us/app/apns-push/id1137371380?ls=1&mt=12">
-    <img src="img/banner.png" height="150">
-</a>
-</p>
-
-[APNS Push](https://itunes.apple.com/us/app/apns-push/id1137371380?ls=1&mt=12) is a Mac app that allows you to send notifications over a `HTTP/2` connection. APNS Push app uses the `APNSwift` library to send push notifications
-
-Now seamlessly send Push Notifications to your iPhone, iPad, Mac and Safari
-
-### Features
-- Directly send notifications using Certificates in KeyChain
-- Also supports newly introduced Unified Push certificates
-- `Basic mode` for quickly testing notifications
-- `Advanced mode` for more fine grained control over push notifications
-
-<p align="right">
-<a href="https://itunes.apple.com/us/app/apns-push/id1137371380?ls=1&mt=12">
-    <img src="img/mac_app_store_badge.png">
-</a>
-</p>
