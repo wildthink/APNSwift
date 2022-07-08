@@ -23,11 +23,15 @@ extension APNS {
         public init() {}
 
         public var description: String {
-            return "Topic \(self.topic)" +
+            var exp: String = "nil"
+            if let date = expiry {
+                exp = "\(date) \(date.timeIntervalSince1970.rounded())"
+            }
+            return "Topic \(self.topic ?? "nil")" +
             "\nPort \(port.rawValue)" +
-            "\nExpiry \(expiry) \(expiry?.timeIntervalSince1970.rounded())" +
-            "\nPriority \(priority)" +
-            "\nAPNSID \(apnsId)" +
+            "\nExpiry \(exp)" +
+            "\nPriority \(priority ?? 0)" +
+            "\nAPNSID \(apnsId ?? "nil")" +
             "\nDevelopment \(development)"
         }
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 public extension APNS {
-    public enum Error: String, CustomStringConvertible {
+    enum Error: String, CustomStringConvertible {
         case payloadEmpty
         case payloadTooLarge
         case badTopic
